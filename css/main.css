@@ -1,0 +1,64 @@
+body{
+    background: #e3d5b3;
+}
+
+.btn {
+    display: inline-block;
+    padding: 3px;
+    margin: 0 2px;
+    text-align: center;
+    font-family: Verdana, Arial;
+    font-size: 12px !important;
+    font-weight: bold;
+    line-height: normal;
+    cursor: pointer;
+    background: #6c4824;
+    background: -moz-linear-gradient(top, #947a62 0%, #7b5c3d 22%, #6c4824 30%, #6c4824 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#947a62), color-stop(22%,#7b5c3d), color-stop(30%,#6c4824), color-stop(100%,#6c4824));
+    background: -webkit-linear-gradient(top, #947a62 0%,#7b5c3d 22%,#6c4824 30%,#6c4824 100%);
+    background: -o-linear-gradient(top, #947a62 0%,#7b5c3d 22%,#6c4824 30%,#6c4824 100%);
+    background: -ms-linear-gradient(top, #947a62 0%,#7b5c3d 22%,#6c4824 30%,#6c4824 100%);
+    background: linear-gradient(to bottom, #947a62 0%,#7b5c3d 22%,#6c4824 30%,#6c4824 100%);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    color: #fff;
+    white-space: nowrap;
+}
+
+.model-btn {
+    width: 25px;
+    color: #ffe8c6;
+}
+
+table {
+    background: #f4e4bc;
+}
+
+td {
+    background: #f4e4bc;
+}
+
+th {
+    background-color: #c1a264 !important;
+}
+
+.villagePadding{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.options-btn {
+    width: 190px;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+#save {
+    margin-top: 10px;
+    padding: 7px 80px;
+}
+
+h1, h2 {
+    color: #553421;
+}

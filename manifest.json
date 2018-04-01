@@ -1,0 +1,63 @@
+{
+	"manifest_version": 2,
+
+	"name": "TW Farm Assistant",
+	"version": "0.1",
+	"description": "Tribalwars farm assistant",
+	"icons": {
+		"16": "icon.png",
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+	"options_page": "options.html",
+
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.die-staemme.de/*",
+				"*://*.staemme.ch/*",
+				"*://*.tribalwars.net/*",
+				"*://*.tribalwars.nl/*",
+				"*://*.plemiona.pl/*",
+				"*://*.tribalwars.se/*",
+				"*://*.tribalwars.com.br/*",
+				"*://*.tribalwars.com.pt/*",
+				"*://*.divokekmeny.cz/*",
+				"*://*.triburile.ro/*",
+				"*://*.voyna-plemyon.ru/*",
+				"*://*.fyletikesmaxes.gr/*",
+				"*://*.tribalwars.com/*",
+				"*://*.divoke-kmene.sk/*",
+				"*://*.klanhaboru.hu/*",
+				"*://*.tribalwars.dk/*",
+				"*://*.tribals.it/*",
+				"*://*.klanlar.org/*",
+				"*://*.guerretribale.fr/*",
+				"*://*.guerrastribales.es/*",
+				"*://*.tribalwars.ae/*",
+				"*://*.tribalwars.co.uk/*",
+				"*://*.vojnaplemen.si/*",
+				"*://*.plemena.com/*",
+				"*://*.tribalwars.asia/*",
+				"*://*.tribalwars.us/*"
+			],
+			"js": [
+				"js/jquery.js",
+				"contentScript.js"
+			],
+			"css": [
+				"css/main.css"
+			]
+		}
+	],
+	"permissions": [
+		"tabs",
+		"activeTab",
+		"storage",
+		"https://ajax.googleapis.com/"
+	]
+}
