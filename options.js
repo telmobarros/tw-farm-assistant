@@ -8,10 +8,14 @@ function save_options() {
 		var arrayOfThisRow = [];
 		var tableData = $(this).find('td').not(":last-child");
 		if (tableData.length > 0) {
-			tableData.each(function() { arrayOfThisRow.push(parseInt($(this).text())); });
+			arrayOfThisRow['isAbandoned'] = $(tableData[0]).children().is(":checked"); // access input of isAbandoned
+			arrayOfThisRow.push(parseInt($(tableData[1]).text()));
+			arrayOfThisRow.push(parseInt($(tableData[2]).text()));
+			console.log(arrayOfThisRow);
 			villagesArray.push(arrayOfThisRow);
 		}
 	});
+	console.log(villagesArray);
 
 	var unitsArray = [];
 
@@ -45,7 +49,8 @@ function restore_options() {
 		villagesArray: [],
 		unitsArray: []
 	}, function(items) {
-		$.each(items.villagesArray, function( i, val ) { addVillageRow(val[0],val[1]); });
+		console.log(items.villagesArray);
+		$.each(items.villagesArray, function( i, val ) { addVillageRow(val['isAbandoned'], val[0],val[1]); });
 		$.each(items.unitsArray, function( i, val ) { addUnitsRow(val); });
 	});
 }
@@ -65,13 +70,15 @@ function deleteVillageRow(row){
 }
 
 function addVillage(){
+	var isAbandoned = $("#isAbandonedInput").is(":checked");
 	var coord1Value = parseInt($("#coord1Input").val());
 	var coord2Value = parseInt($("#coord2Input").val());
 
 	if (isValidCoord(coord1Value) && isValidCoord(coord2Value)){
+		$("#isAbandonedInput").prop('checked', true);
 		$("#coord1Input").val("");
 		$("#coord2Input").val("");
-		addVillageRow(coord1Value, coord2Value);
+		addVillageRow(isAbandoned, coord1Value, coord2Value);
 		save_options();
 	} else {
 		alert("Enter valid coordinates");
@@ -79,7 +86,7 @@ function addVillage(){
 	}
 }
 
-function addVillageRow(coord1, coord2){
+function addVillageRow(isAbandoned, coord1, coord2){
 	var table=document.getElementById('villagesTable');
 	var tableLength = table.rows.length;
 	var newRow = table.insertRow(tableLength - 1);
@@ -89,14 +96,16 @@ function addVillageRow(coord1, coord2){
 	var cell1 = newRow.insertCell(0);
 	var cell2 = newRow.insertCell(1);
 	var cell3 = newRow.insertCell(2);
+	var cell4 = newRow.insertCell(3);
 
 	// Add some text to the new cells:
-	cell1.innerHTML = coord1;
-	cell2.innerHTML = coord2;
+	cell1.innerHTML = '<input type="checkbox" disabled ' + (isAbandoned ? 'checked/>' : '/>');
+	cell2.innerHTML = coord1;
+	cell3.innerHTML = coord2;
 	var deleteButton = document.createElement("img");
 	deleteButton.src = "https://dspt.innogamescdn.com/8.69/32045/graphic/delete.png";
 	deleteButton.addEventListener('click', function(){deleteVillageRow(this);}, false);
-	cell3.appendChild(deleteButton);
+	cell4.appendChild(deleteButton);
 }
 
 function isValidCoord(coord){
