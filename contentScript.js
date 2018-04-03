@@ -73,10 +73,18 @@ function continueAttack(){
 
 //message handler
 chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
+	if(request.type == 'getCurrentVillage'){
+		var coords = $("tr#menu_row2 b").text();
+		sendResponse({
+			name: $("tr#menu_row2 a").text(),
+			coords1: coords.substr(1, 3),
+			coords2: coords.substr(5, 3)
+		});
+	}else {
 		var newAttack = request.greeting;
 		attacksQueue.push(newAttack);
-		
-		console.log(request.greeting);
+	}
+		console.log(request);
 });
 
 function placeAttack(){
