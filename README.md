@@ -58,3 +58,16 @@ No, some of the aspects different from the in-game assistant that you need to be
 As a lover of Tribalwars I developed and shared this tool with the only intent of providing a free farm alternative to all the game lovers.
 
 :exclamation: If you have any question, problem or improvement idea leave it in a issue :exclamation:
+
+## Release History
+
+### 0.2 (What's new?)
+- Villages with name and abandoned checkbox
+- Automatic village storage through button in village information page
+- Visual indication of abandoned villages
+- Useless save button removed from options page
+- Export and import configurations
+
+### 0.1
+- Automatic attack
+- Villages and unit models manual configuration
