@@ -39,6 +39,10 @@ td {
     background: #f4e4bc;
 }
 
+tr.abandonedVillage td{
+    background-color: #d8d8d8;
+}
+
 th {
     background-color: #c1a264 !important;
 }

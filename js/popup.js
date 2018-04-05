@@ -23,24 +23,31 @@ function restore_options(callback) {
 	}, callback);
 }
 
-function addVillage(coord1, coord2, dist, units){
+function addVillage(village, units){
 	var table=document.getElementById('villagesTable');
 	var tableLength = table.rows.length;
 	var newRow = table.insertRow(tableLength);
 	newRow.align = "center";
+	if(village.isAbandoned){
+		newRow.className = 'abandonedVillage'; // class to change css if the village is abandoned
+	}
 
 	// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-	var cell1 = newRow.insertCell(0);
-	var cell2 = newRow.insertCell(1);
-	var cell3 = newRow.insertCell(2);
+	var cell0 = newRow.insertCell(0);
+	var cell1 = newRow.insertCell(1);
+	var cell2 = newRow.insertCell(2);
+	var cell3 = newRow.insertCell(3);
+
+	// Add village name
+	cell0.innerHTML = village.name;
 
 	// Add village coordinates to the first cell
-	cell1.innerHTML = "(" + coord1 + "|" + coord2 + ")";
+	cell1.innerHTML = "(" + village.coords[0] + "|" + village.coords[1] + ")";
 	cell1.className = "villagePadding";
 
-	cell2.innerHTML = dist;
+	cell2.innerHTML = village.dist;
 
-	var  modelsButtons = getUnitsButton(coord1, coord2, units)
+	var  modelsButtons = getUnitsButton(village.coords[0], village.coords[1], units)
 	$.each(modelsButtons, function( i, val ) {
 		cell3.append(val);
 	});
@@ -76,13 +83,6 @@ function addAttackToQueue(coord1, coord2, val){
 
 }
 
-function distanceBetweenVillages (coords11, coords12, coords21, coords22){
-	var a = coords11 - coords21;
-	var b = coords12 - coords22;
-	var c = Math.sqrt( a*a + b*b );
-	return Math.round( c * 10 ) / 10; // rounds to 1 decimal place
-}
-
 document.addEventListener('DOMContentLoaded', function() {
 	// add click listener to options button (redirect to options page)
 	document.getElementById("options_link").addEventListener("click", function(){chrome.tabs.create({'url': "/options.html"}); });
@@ -91,24 +91,32 @@ document.addEventListener('DOMContentLoaded', function() {
 	sendMessage('getCurrentVillage', null, function (response){
 		currentVillage = response;
 		console.log(currentVillage);
+		if(typeof currentVillage === 'undefined'){
+			$('#currentVillage').text('Please go to Tribalwars tab.');
+		} else {
+			$('#currentVillage').text(currentVillage.name + ' (' + currentVillage.coords[0] + '|' + currentVillage.coords[1] + ')');
 
-		// after receiving currentVillage get stored villages and units models and displays them
-		restore_options(function(items) {
-			var orderedVillages = items.villagesArray;
+			// after receiving currentVillage get stored villages and units models and displays them
+			restore_options(function (items) {
+				var orderedVillages = items.villagesArray;
+				console.log(orderedVillages);
 
-			// add distance to the current village parameter
-			$.each(orderedVillages, function( i, val ) {
-				val['dist'] = distanceBetweenVillages(val[0],val[1], currentVillage.coords1, currentVillage.coords2);
+				// add distance to the current village parameter
+				$.each(orderedVillages, function (i, val) {
+					val['dist'] = distanceBetweenVillages(val.coords, currentVillage.coords);
+				});
+
+				// sort by distance
+				orderedVillages.sort(function (a, b) {
+					return a['dist'] - b['dist']
+				});
+
+				// add villages to the table and display in popup
+				$.each(orderedVillages, function (i, village) {
+					addVillage(village, items.unitsArray);
+				});
 			});
-
-			// sort by distance
-			orderedVillages.sort(function(a, b){return a['dist']-b['dist']});
-
-			// add villages to the table and display in popup
-			$.each(orderedVillages, function( i, val ) {
-				addVillage(val[0],val[1], val['dist'],items.unitsArray);
-			});
-		});
+		}
 	});
 
 });
