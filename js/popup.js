@@ -85,7 +85,7 @@ function addAttackToQueue(coord1, coord2, val){
 
 document.addEventListener('DOMContentLoaded', function() {
 	// add click listener to options button (redirect to options page)
-	document.getElementById("options_link").addEventListener("click", function(){chrome.tabs.create({'url': "/options.html"}); });
+	document.getElementById("options_link").addEventListener("click", function(){chrome.tabs.create({'url': "/html/options.html"}); });
 
 	//gets current village
 	sendMessage('getCurrentVillage', null, function (response){

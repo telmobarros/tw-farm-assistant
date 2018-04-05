@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', function(){
 		$("#addVillageButton").click(addVillage);
 		$("#addUnitsButton").click(addUnits);
 
-		$("#exportButton").click(exportConfiguration);
+		$("#exportButtonAll").click(exportConfigurationAll);
+		$("#exportButtonWorld").click(exportConfigurationWorld);
 		$("#importButton").click(importConfiguration);
 	}
 );
@@ -184,7 +185,24 @@ function showSuccessStatus(){
 	}, 1000);
 }
 
-function exportConfiguration(){
+function exportConfigurationAll(){
+	chrome.storage.sync.get({
+		villagesArray: [],
+		unitsArray: []
+	}, function(items) {
+
+		var newDate = new Date();
+		var filename = newDate.getFullYear()+'_'+parseInt(newDate.getMonth()+1)+'_'+newDate.getDate()+'__'+newDate.getHours()+'_'+newDate.getMinutes() + '.tw';
+
+		var a = document.createElement('a');
+		a.setAttribute('href', 'data:text/plain;charset=utf-u,'+encodeURIComponent(JSON.stringify(items)));
+		a.setAttribute('download', filename);
+		a.click();
+
+	});
+}
+
+function exportConfigurationWorld(){
 	chrome.storage.sync.get({
 		villagesArray: [],
 		unitsArray: []
@@ -201,5 +219,23 @@ function exportConfiguration(){
 	});
 }
 function importConfiguration(){
-	alert('Not implemented');
+	var files = document.getElementById('selectFiles').files;
+	console.log(files);
+	if (files.length <= 0) {
+		alert('Please select a file to import below.');
+		return false;
+	}
+
+	var fr = new FileReader();
+
+	fr.onload = function(e) {
+		console.log(e);
+		var result = JSON.parse(e.target.result);
+		//var formatted = JSON.stringify(result, null, 2);
+		console.log(result);
+		chrome.storage.sync.set(result, showSuccessStatus());
+		location.reload();
+	};
+
+	fr.readAsText(files.item(0));
 }

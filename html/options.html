@@ -3,11 +3,11 @@
 <head>
     <title>TW Farm Assistant Configurator</title>
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 
-    <script src="js/vendor/jquery.js"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/options/options.js"></script>
+    <script src="../js/vendor/jquery.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/options/options.js"></script>
 </head>
 <body>
 <h1 align="center">TW Farm Assistant<br>Configurator</h1>
@@ -67,8 +67,11 @@
 </div>
 
 <div align="center">
-    <a class="btn options-btn" id="exportButton" href=#>Export configurations</a>
+    <a class="btn options-btn" id="exportButtonAll" href=#>Export all configurations</a>
+    <a class="btn options-btn" id="exportButtonWorld" href=#>Export world configurations</a>
     <a class="btn options-btn" id="importButton" href=#>Import configurations</a>
+    <br>
+    <input type="file" class="options-btn"  id="selectFiles" value="Import" />
     <h3 id="status"></h3>
 </div>
 </body>

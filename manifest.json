@@ -9,11 +9,11 @@
 		"48": "imgs/icon.png",
 		"128": "imgs/icon.png"
 	},
-	"options_page": "options.html",
+	"options_page": "html/options.html",
 
 	"browser_action": {
 		"default_icon": "imgs/icon.png",
-		"default_popup": "popup.html"
+		"default_popup": "html/popup.html"
 	},
 	"content_scripts": [
 		{
