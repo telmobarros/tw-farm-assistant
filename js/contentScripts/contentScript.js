@@ -10,18 +10,18 @@ console.log(attacksQueue);
 
 function tick(){
 	chrome.storage.sync.get({
-	attacksQueue: []
-  }, function(items) {
-	  attacksQueue = items.attacksQueue;
-  });
-	
+		attacksQueue: []
+	}, function(items) {
+		attacksQueue = items.attacksQueue;
+	});
+
 	if (status == "WAITING"){
 		if (attacksQueue.length > 0){
 			status = "PLACING_UNITS";
 			chrome.storage.sync.set({
 				status: status
 			}, function() {
-				  console.log("State [Placing Units]");
+				console.log("State [Placing Units]");
 			});
 			location = "game.php?screen=place";
 		}
@@ -29,46 +29,46 @@ function tick(){
 }
 
 function restore_variables() {
-  chrome.storage.sync.get({
-	attacksQueue: [],
-	status : "WAITING"
-  }, function(items) {
-	  attacksQueue = items.attacksQueue;
-	  status = items.status;
-  console.log(attacksQueue);
-  continueAttack();
-  });
+	chrome.storage.sync.get({
+		attacksQueue: [],
+		status : "WAITING"
+	}, function(items) {
+		attacksQueue = items.attacksQueue;
+		status = items.status;
+		console.log(attacksQueue);
+		continueAttack();
+	});
 }
 
 function continueAttack(){
 	if(status=="PLACING_UNITS"){
-	if(attacksQueue.length > 0){
-		status = "CONFIRMING_ATTACK";
+		if(attacksQueue.length > 0){
+			status = "CONFIRMING_ATTACK";
 			chrome.storage.sync.set({
 				status: status
 			}, function() {
-				  console.log("State [Confirming Attack]");
+				console.log("State [Confirming Attack]");
 			});
-		placeAttack();
+			placeAttack();
 		} else {
-		console.log(attacksQueue);
-		status = "WAITING";
+			console.log(attacksQueue);
+			status = "WAITING";
 			chrome.storage.sync.set({
 				status: status
 			}, function() {
-				  console.log("State [Waiting 1]");
+				console.log("State [Waiting 1]");
 			});
-	}
+		}
 	}else if(status=="CONFIRMING_ATTACK"){
 		status = "WAITING";
-			chrome.storage.sync.set({
-				status: status
-			}, function() {
-				  console.log("State [Waiting 2]");
-			});
+		chrome.storage.sync.set({
+			status: status
+		}, function() {
+			console.log("State [Waiting 2]");
+		});
 		confirmAttack();
 	}
-	
+
 }
 
 //message handler
@@ -77,24 +77,23 @@ chrome.runtime.onMessage.addListener( function(request, sender, sendResponse) {
 		var coords = $("tr#menu_row2 b").text();
 		sendResponse({
 			name: $("tr#menu_row2 a").text(),
-			coords1: coords.substr(1, 3),
-			coords2: coords.substr(5, 3)
+			coords: [coords.substr(1, 3), coords.substr(5, 3)]
 		});
 	}else {
 		var newAttack = request.greeting;
 		attacksQueue.push(newAttack);
 	}
-		console.log(request);
+	console.log(request);
 });
 
 function placeAttack(){
 	var currentAttack = attacksQueue.shift();
 	chrome.storage.sync.set({
-	attacksQueue: attacksQueue
-  }, function() {
-	  console.log("Placing attack");
-	  console.log(attacksQueue);
-  });
+		attacksQueue: attacksQueue
+	}, function() {
+		console.log("Placing attack");
+		console.log(attacksQueue);
+	});
 	placeCoordsToAttack(currentAttack[0][0],currentAttack[0][1]);
 	placeUnitsToAttack(currentAttack[1]);
 	$("input#target_attack").click();
@@ -103,9 +102,9 @@ function placeAttack(){
 function confirmAttack(){
 	console.log("Clicking on confirm button");
 	$("input#troop_confirm_go").click();
-} 
-  
-  
+}
+
+
 function placeCoordsToAttack(coord1,coord2){
 	$("input.target-input-field").val(coord1 + "|" + coord2);
 }

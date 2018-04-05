@@ -5,14 +5,14 @@
 	"version": "0.2",
 	"description": "Tribalwars farm assistant",
 	"icons": {
-		"16": "icon.png",
-		"48": "icon.png",
-		"128": "icon.png"
+		"16": "imgs/icon.png",
+		"48": "imgs/icon.png",
+		"128": "imgs/icon.png"
 	},
 	"options_page": "options.html",
 
 	"browser_action": {
-		"default_icon": "icon.png",
+		"default_icon": "imgs/icon.png",
 		"default_popup": "popup.html"
 	},
 	"content_scripts": [
@@ -46,8 +46,8 @@
 				"*://*.tribalwars.us/*"
 			],
 			"js": [
-				"js/jquery.js",
-				"contentScript.js"
+				"js/vendor/jquery.js",
+				"js/contentScripts/contentScript.js"
 			]
 		},
 
@@ -82,7 +82,8 @@
 			],
 			"include_globs": ["*info_village*"],
 			"js": [
-				"addVillageButton.js"
+				"js/utils.js",
+				"js/contentScripts/addVillageButton.js"
 			]
 		}
 	],
