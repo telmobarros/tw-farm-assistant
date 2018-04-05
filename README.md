@@ -13,7 +13,7 @@ As TW Farm Assistant is a personal open-source project you are free to modify it
 
 ### How to use it?
 
-#### Step 1
+#### Step 1 (Get to know the tool)
 
 When you first install the extension you won't have any villages or units models configured and by clicking you may see this:
 
@@ -21,19 +21,41 @@ When you first install the extension you won't have any villages or units models
 
 To add a new village and/or units model click in "Configure farm" button.
 
-#### Step 2
-This configuration page is very intuitive and similar to the tribalwars style. In the first table you can add or remove villages and in the second one you can add or remove units models.
+#### Step 2 (Add villages and units models)
+
+This configuration page is very intuitive and similar to the tribalwars style. In the first table you can add or remove villages, give  it a name to identify it and select whether it is abandoned or not. In the second one you can add or remove units models.
 
 ![Options page](./imgs/options.png)
 
-The page has also a **Save** button but all the changes are stored as they are performed so you don't need to worry!
+#### OR
 
-#### Step 3
+You can also store the village from its overview page.
+
+![Add village overview](./imgs/addvillage_overview.png)
+
+In this bottom button you can input a name to identify the village (by default it is filled with the name of the owning player or empty for abandoned villages). This will automatically store it.
+
+![Add village](./imgs/addvillage.png)
+
+#### Step 3 (Farm)
+
 Now that you have all setup and running your extension popup may look similar to this.
 
 ![Popup](./imgs/popup.png)
 
 To start farming **MAKE SURE THAT YOU HAVE ONLY ONE TAB OF THE GAME OPEN** and click the model you want to use. Now you may see your attack been placed in the next seconds *et voilá!* 
+
+#### Step 4 (Share your configuration)
+
+In the bottom of the configuration page there are three buttons.
+
+- 'Export all configurations' is used to download a file containing the configurations of all worlds.
+- 'Export world configurations' is used to download a file containing the configurations of the current world.
+- 'Import configurations' is used to import the configuration through the selected file, **PLEASE NOTE, if it is afile from 'Export world configurations' button it will only override the specific world, but if it is a file from 'Export all configurations' button it will OVERRIDE ALL YOUR CURRENT CONFIGURATIONS**
+
+You can use this feature not only to share this configurations files between the computers you play the game on but also to share them with your friends!
+
+---
 
 ## FAQ's
 
@@ -58,3 +80,18 @@ No, some of the aspects different from the in-game assistant that you need to be
 As a lover of Tribalwars I developed and shared this tool with the only intent of providing a free farm alternative to all the game lovers.
 
 :exclamation: If you have any question, problem or improvement idea leave it in a issue :exclamation:
+
+---
+
+## Release History
+
+### 0.2 (What's new?)
+- Villages with name and abandoned checkbox
+- Automatic village storage through button in village information page
+- Visual indication of abandoned villages
+- Useless save button removed from options page
+- Export and import configurations
+
+### 0.1
+- Automatic attack
+- Villages and unit models manual configuration

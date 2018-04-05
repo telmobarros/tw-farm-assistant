@@ -3,10 +3,11 @@
 <head>
     <title>TW Farm Assistant Configurator</title>
 
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
 
-    <script src="js/jquery.js"></script>
-    <script src="options.js"></script>
+    <script src="../js/vendor/jquery.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/options/options.js"></script>
 </head>
 <body>
 <h1 align="center">TW Farm Assistant<br>Configurator</h1>
@@ -14,11 +15,15 @@
     <h2>Villages</h2>
     <table id="villagesTable" border="1">
         <tr>
+            <th align="center">Village</th>
+            <th align="center"><img src="https://dspt.innogamescdn.com/8.121/36674/graphic//map/version2/v1_left.png" title="Abandoned village" alt="" class=""></th>
             <th align="center">Coord 1</th>
             <th align="center">Coord 2</th>
             <th></th>
         </tr>
         <tr>
+            <td align="center"><input type="text" id="nameInput" placeholder="Name"></td>
+            <td align="center"><input type="checkbox" id="isAbandonedInput" checked/></td>
             <td align="center"><input type="text" id="coord1Input" maxlength="3" size="3"/></td>
             <td align="center"><input type="text" id="coord2Input" maxlength="3" size="3"/></td>
             <td><input type="button" class="btn" id="addVillageButton" value="Add Village"/></td>
@@ -62,8 +67,12 @@
 </div>
 
 <div align="center">
-    <button id="save" class="btn">Save</button>
-    <div id="status"></div>
+    <a class="btn options-btn" id="exportButtonAll" href=#>Export all configurations</a>
+    <a class="btn options-btn" id="exportButtonWorld" href=#>Export world configurations</a>
+    <a class="btn options-btn" id="importButton" href=#>Import configurations</a>
+    <br>
+    <input type="file" class="options-btn"  id="selectFiles" value="Import" />
+    <h3 id="status"></h3>
 </div>
 </body>
 </html>
